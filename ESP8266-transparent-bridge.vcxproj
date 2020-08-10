@@ -37,6 +37,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55169C13-275D-46F6-B8E8-C3501533A18E}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
+    <ProjectName>ESP8266-MS3</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
@@ -67,7 +68,7 @@
     <NMakeReBuildCommandLine>espmake clean all flash</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>espmake clean</NMakeCleanCommandLine>
   </PropertyGroup>
-   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <NMakeBuildCommandLine>espmake</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>espmake clean all</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>espmake clean</NMakeCleanCommandLine>
@@ -77,7 +78,6 @@
       <Path />
     </BuildLog>
   </ItemDefinitionGroup>
- 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

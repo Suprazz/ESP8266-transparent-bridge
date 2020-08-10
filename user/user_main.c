@@ -66,6 +66,16 @@ void user_init(void)
 	uint8_t i;
 	//wifi_set_opmode(3); //STA+AP
 
+#ifdef CONFIG_GPIO
+	config_gpio();
+	// Set pin 12 low for debugging
+	//gpio_output_set(0, BIT13, BIT13, 0);
+	//gpio_output_set(0, BIT12, BIT12, 0);
+	//os_delay_us(10000); // 10ms
+	//gpio_output_set(BIT13, 0, BIT13, 0);
+	//gpio_output_set(BIT12, 0, BIT12, 0);
+#endif
+
 	#ifdef CONFIG_DYNAMIC
 		flash_param_t *flash_param;
 		flash_param_init();
@@ -94,12 +104,10 @@ void user_init(void)
 		serverInit(23);
 	#endif
 
-	#ifdef CONFIG_GPIO
-		config_gpio();
-	#endif
-
 	for (i = 0; i < 16; ++i)
 		uart0_sendStr("\r\n");
 
 	system_os_task(recvTask, recvTaskPrio, recvTaskQueue, recvTaskQueueLen);
+
+	
 }

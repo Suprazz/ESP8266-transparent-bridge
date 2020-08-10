@@ -46,9 +46,12 @@ uart_config(uint8 uart_no)
   }
   else
   {
+	//PIN_PULLUP_DIS(PERIPHS_IO_MUX_U0RXD_U); // Do not enable PULL UP resistor on RX line.
+	//PIN_PULLDWN_DIS(PERIPHS_IO_MUX_U0RXD_U);
+
     /* rcv_buff size if 0x100 */
     ETS_UART_INTR_ATTACH(uart0_rx_intr_handler,  &(UartDev.rcv_buff));
-    PIN_PULLUP_DIS(PERIPHS_IO_MUX_U0TXD_U);
+    PIN_PULLUP_DIS(PERIPHS_IO_MUX_U0TXD_U); // je ne sais pas pk mais c'est la....
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_U0TXD_U, FUNC_U0TXD);
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDO_U, FUNC_U0RTS);
   }

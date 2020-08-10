@@ -80,6 +80,7 @@ void config_gpio(void) {
 	gpio_init();
 	//Set GPIO2 to output mode
 	PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2);
+	//PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U, FUNC_GPIO12);
 	//Set GPIO2 high
 	gpio_output_set(BIT2, 0, BIT2, 0);
 }

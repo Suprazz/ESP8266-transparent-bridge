@@ -4,6 +4,7 @@
 #include "c_types.h"
 #include "driver/uart.h"
 #include "flash_param.h"
+#include "osapi.h"
 
 #define FLASH_PARAM_START_SECTOR 0x3C
 #define FLASH_PARAM_SECTOR (FLASH_PARAM_START_SECTOR + 0)
@@ -45,10 +46,20 @@ void ICACHE_FLASH_ATTR flash_param_init_defaults(void) {
 	flash_param_t *flash_param = flash_param_get();
 	flash_param->magic = FLASH_PARAM_MAGIC;
 	flash_param->version = FLASH_PARAM_VERSION;
-	flash_param->baud = 115200;
-	flash_param->port = 23;
+	//flash_param->baud = 115200; // MS3
+	flash_param->baud = 19200; // ECUMaster, Spitronics
+	//flash_param->baud = 57600; // DTAFast
+	flash_param->port = 8080;
 	flash_param->uartconf0 = CALC_UARTMODE(EIGHT_BITS, NONE_BITS, ONE_STOP_BIT);
 	flash_param_set();
+
+	uint8_t mode;
+	mode = wifi_get_opmode();
+	if (mode != STATIONAP_MODE) {
+		wifi_set_opmode(STATIONAP_MODE);
+		os_delay_us(10000);
+		system_restart();
+	}
 }
 
 flash_param_t* ICACHE_FLASH_ATTR flash_param_init(void) {
